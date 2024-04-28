@@ -8,7 +8,7 @@ public class Wind : MonoBehaviour
 {
     // Start is called before the first frame update
     public bool IsWindy { get; set; }
-    [SerializeField]public float windPower;
+    [SerializeField]public float windYana,windYukari;
     void Start()
     {
         GetComponentInChildren<ParticleSystem>().Stop();
@@ -16,13 +16,13 @@ public class Wind : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         if (IsWindy) {
             var ss = FindObjectsOfType<MonoBehaviour>().OfType<IWindAffected>();
             foreach (IWindAffected s in ss)
             {
-                s.ApplyWind(windPower);
+                s.ApplyWind(windYana,windYukari);
             }
         }
         
